@@ -14,7 +14,7 @@ namespace Aanwezigheidslijst
     {
         public string naam => NaamTextBox.Text;
         public string Adres => AdresTextBox.Text;
-        public string Geboortedatum => GeboortedatumTextbox.Text;
+        public DateTime Geboortedatum => BirthdayPicker.Value;
         public AddStudentForm()
         {
             InitializeComponent();
@@ -27,8 +27,23 @@ namespace Aanwezigheidslijst
 
         private void AddStudentBtn_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.OK;
-            Close();
+            if (NaamTextBox.Text != "" && !System.Text.RegularExpressions.Regex.IsMatch(NaamTextBox.Text, "^[1-9 ]"))
+            {
+            }
+            else
+            {
+                AddStudentNameError.SetError(NaamTextBox, "Verkeerde input");
+            }
+            if (AdresTextBox.Text != "" && !System.Text.RegularExpressions.Regex.IsMatch(AdresTextBox.Text, "^[1-9 ]"))
+            {
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+            else
+            {
+                AddStudentAdresError.SetError(AdresTextBox, "Verkeerde adres");
+            }
         }
+
     }
 }
